@@ -1,0 +1,36 @@
+<% if @photo %>
+	<p>Photo Name : <%= @photo.name %></p>
+	<p>Description : <%= @photo.description %></p>
+	<%= image_tag @photo.photo.url(:small) %></p>
+	<%= link_to "Edit", edit_photo_path(@photo.id), :class => "btn" %>
+	<%= link_to "Delete", photo_path(@photo), :method => "delete", :confirm => "Are you sure you want to Delete this photo", :class => "btn" %>
+	<%= link_to "Add Comment", "#", :class => "btn", :id => "newnote" %>
+
+	<div id="new_note_view" style="padding-top:10px;display:none;">
+        <%= render :partial => "comments/form", :locals => { :photo => @photo } %>
+    </div><br/><br/>
+    
+    <div>
+        <pre><strong>Comments:</strong>
+            <% @photo.comments.each do |comment| %>
+    	    <%= comment.description %>,  Created on : <%= gmail_date_format(comment.created_at) %>
+            <% end %>
+        </pre>
+    </div>
+<% else %>
+	<p>Page Not Found</p>
+<% end %>
+
+<script type="text/javascript" >
+$(function() {
+    
+    $("#newnote").click(function() {
+     	$("#new_note_view").show(); 
+    });
+
+    $(".cancel_comment").click(function() {
+    	$("#new_note_view").hide();
+    });
+});
+</script>
+

@@ -1,0 +1,11 @@
+<%= link_to "Add photo", new_photo_path(:album_id => @album.id) %>
+<p>
+	Album Name :<%= @album.name %><br/>
+	Description :<%= @album.description %>
+</p>
+<p>Photos of this album</p>
+<% if @album.photos %>
+	<% @album.photos.each do |photo| %>
+		<%= link_to photo_name(photo, "thumb"), photo_path(photo) %>
+	<% end %>
+<% end %>

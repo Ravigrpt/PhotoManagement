@@ -1,0 +1,40 @@
+<%= form_for @photo, :html => { :class => 'form' } do |f| %>
+	<div class="control-group">
+		<%= f.label :name, "Photo Name" %>
+		<%= f.text_field :name, :class => "input-large" %>
+    </div>
+    <div class="control-group">
+		<%= f.label :description, "Description" %>
+		<%= f.text_area :description, :rows => "3", :class => "input-large" %>
+    </div>
+    <div class="control-group">
+		<%= f.label :photo, "Upload Photo" %>
+		<%= f.file_field :photo %>
+	</div>
+	<%= f.submit "Save", :class => "btn" %>
+	<%= link_to "Cancel", photo_path(@photo.id), :class => "btn" %>
+<% end %>
+
+<%= javascript_include_tag 'jquery.validate.min.js' %> 
+<script type="text/javascript">
+$(function() {
+	
+    $(".form").validate({
+    	
+        rules: { 
+            "photo[name]": "required",
+            "photo[photo]": "required"
+        },
+        messages: { 
+            "photo[name]": "required",
+            "photo[photo]": "required"
+        },
+
+        errorPlacement: function(error, element) { 
+            error.appendTo(element.after(" required")); 
+        } 
+
+    });
+});
+
+</script>

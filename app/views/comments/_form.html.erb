@@ -1,0 +1,11 @@
+<%= form_for Comment.new, :class => "form-inline" do |f| %>
+	
+    <div class="control-group">
+		<%= f.label :description, "Description" %>
+		<%= f.text_area :description, :rows => "3", :class => "input-large" %>
+    </div>
+    <%= f.hidden_field :photo_id, :value => photo.id %>
+	<%= f.submit "Add Comment", :class => "btn" %>
+	<%= link_to "Cancel", "#", :class => "btn cancel_comment" %>
+
+<% end %>

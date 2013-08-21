@@ -1,0 +1,37 @@
+<%= form_for @album, :html => { :class => 'form' }  do |f| %>
+	<div class="control-group">
+		<%= f.label :name, "Abum Name" %>
+		<%= f.text_field :name, :class => "input-large" %>
+    </div>
+    <div class="control-group">
+		<%= f.label :description, "Description" %>
+		<%= f.text_area :description, :rows => "3", :class => "input-large" %>
+    </div>
+	<%= f.submit "Save", :class => "btn" %>
+	<%= link_to "Cancel", albums_path, :class => "btn" %>
+<% end %>
+
+
+<%= javascript_include_tag 'jquery.validate.min.js' %> 
+<script type="text/javascript">
+$(function() {
+	
+    $(".form").validate({
+    	
+        rules: { 
+            "album[name]": "required",
+            "album[description]": "required"
+        },
+        messages: { 
+            "album[name]": "required",
+            "album[description]": "required"
+        },
+
+        errorPlacement: function(error, element) { 
+            error.appendTo(element.after("required")); 
+        } 
+
+    });
+});
+
+</script>

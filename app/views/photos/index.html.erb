@@ -1,0 +1,27 @@
+<% if @photos.present? %>
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+        	<div class="active item">
+                <center>
+                    <%= link_to photo_name(@photos.first, "large"), photo_url(@photos.first.id) %>
+                </center>
+            </div>
+        	<% @photos.each do |photo| %>
+    		  <div class="item"><center><%= link_to photo_name(photo, "large"), photo_url(photo.id) %></center></div>
+    		<% end %>
+        </div>
+
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+
+    </div>
+<% else %>
+    <p>No Photos</p>
+<% end %>
+<script type="text/javascript">
+$(function() {
+    $('.carousel').carousel({
+        interval: "100"
+    });
+});
+</script>
